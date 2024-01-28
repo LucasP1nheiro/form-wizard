@@ -21,6 +21,7 @@ import { availableComponents } from '@/utils/available-components'
 import { getEmptyProps } from '@/utils/get-empty-props'
 import { useComponentStore } from '@/store/components'
 import { generateRandomString } from '@/utils/generate-random-string'
+import { Preview } from '@/components/preview'
 
 const Page = () => {
   const { components, setComponents } = useComponentStore()
@@ -72,70 +73,75 @@ const Page = () => {
   }
 
   return (
-    <main className="w-screen min-h-screen flex items-start justify-around bg-background py-32">
-      <DndContext
-        sensors={sensors}
-        onDragEnd={(event: DragEndEvent) => {
-          const { active, over } = event
+    <main className="w-screen min-h-screen bg-background py-32 space-y-5">
+      <div className="w-4/5 mx-auto">
+        <Preview />
+      </div>
+      <div className="flex items-center w-4/5 justify-between mx-auto">
+        <DndContext
+          sensors={sensors}
+          onDragEnd={(event: DragEndEvent) => {
+            const { active, over } = event
 
-          const isAddingNewItem = availableComponents.some(
-            (item) => item.name === active?.id,
-          )
+            const isAddingNewItem = availableComponents.some(
+              (item) => item.name === active?.id,
+            )
 
-          if (isAddingNewItem && over) {
-            return addItem(event)
-          }
+            if (isAddingNewItem && over) {
+              return addItem(event)
+            }
 
-          return handleSorting(event)
-        }}
-      >
-        <Droppable>
-          <SortableContext
-            items={components.map((item) => item.id)}
-            strategy={verticalListSortingStrategy}
-          >
-            <ul className="h-full min-h-[700px] w-full flex flex-col gap-4 border bg-background border-border rounded-md px-4 py-8">
-              {components.map(
-                (component) =>
-                  component !== undefined && (
-                    <SortableItem
-                      type={component.type}
-                      key={component.id}
-                      id={component.id}
-                      deleteItem={() => deleteItem(component.id)}
+            return handleSorting(event)
+          }}
+        >
+          <Droppable>
+            <SortableContext
+              items={components.map((item) => item.id)}
+              strategy={verticalListSortingStrategy}
+            >
+              <ul className="h-full min-h-[700px] w-full flex flex-col gap-4 border bg-background border-border rounded-md px-4 py-8">
+                {components.map(
+                  (component) =>
+                    component !== undefined && (
+                      <SortableItem
+                        type={component.type}
+                        key={component.id}
+                        id={component.id}
+                        deleteItem={() => deleteItem(component.id)}
+                      />
+                    ),
+                )}
+                {components.length === 0 && (
+                  <div className="w-full h-full flex items-center text-center justify-center flex-col my-auto space-y-5">
+                    <Image
+                      src={empty.src}
+                      alt="Empty"
+                      width={300}
+                      height={300}
+                      priority
+                      className="h-auto"
                     />
-                  ),
-              )}
-              {components.length === 0 && (
-                <div className="w-full h-full flex items-center text-center justify-center flex-col my-auto space-y-5">
-                  <Image
-                    src={empty.src}
-                    alt="Empty"
-                    width={300}
-                    height={300}
-                    priority
-                    className="h-auto"
-                  />
-                  <div className="space-y-8">
-                    <h1 className="text-foreground text-2xl font-medium">
-                      The form is empty
-                    </h1>
-                    <span className="text-muted-foreground">
-                      Try <strong className="text-primary">dropping</strong> a
-                      component to build the form.
-                    </span>
+                    <div className="space-y-8">
+                      <h1 className="text-foreground text-2xl font-medium">
+                        The form is empty
+                      </h1>
+                      <span className="text-muted-foreground">
+                        Try <strong className="text-primary">dropping</strong> a
+                        component to build the form.
+                      </span>
+                    </div>
                   </div>
-                </div>
-              )}
-            </ul>
-          </SortableContext>
-        </Droppable>
-        <div className="w-1/4 h-full min-h-[600px] grid grid-cols-2 gap-16 ">
-          {availableComponents.map((item) => (
-            <Draggable key={item.name} id={item.name} icon={item.icon} />
-          ))}
-        </div>
-      </DndContext>
+                )}
+              </ul>
+            </SortableContext>
+          </Droppable>
+          <div className="w-1/4 h-full min-h-[600px] grid grid-cols-2 gap-16 ">
+            {availableComponents.map((item) => (
+              <Draggable key={item.name} id={item.name} icon={item.icon} />
+            ))}
+          </div>
+        </DndContext>
+      </div>
     </main>
   )
 }

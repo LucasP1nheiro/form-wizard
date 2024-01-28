@@ -12,7 +12,6 @@ import DatePickerFields from '@/components/fields/datepicker-fields'
 import SelectFields from '@/components/fields/select-fields'
 import CheckboxFields from '@/components/fields/checkbox-fields'
 import RadioGroupFields from '@/components/fields/radio-group-fields'
-import { type } from 'os'
 
 export interface AvailableComponentsProps {
   name: string
