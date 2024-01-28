@@ -13,8 +13,6 @@ import {
   arrayMove,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable'
-import Image from 'next/image'
-import empty from '@/assets/empty.svg'
 import Draggable from '@/components/draggable'
 import Droppable from '@/components/droppable'
 import { availableComponents } from '@/utils/available-components'
@@ -22,6 +20,8 @@ import { getEmptyProps } from '@/utils/get-empty-props'
 import { useComponentStore } from '@/store/components'
 import { generateRandomString } from '@/utils/generate-random-string'
 import { Preview } from '@/components/preview'
+import { UploadIcon } from 'lucide-react'
+import { ScrollArea } from '@/components/ui/scroll-area'
 
 const Page = () => {
   const { components, setComponents } = useComponentStore()
@@ -77,7 +77,7 @@ const Page = () => {
       <div className="w-4/5 mx-auto">
         <Preview />
       </div>
-      <div className="flex items-center w-4/5 justify-between mx-auto">
+      <div className="flex items-start w-4/5 justify-between mx-auto">
         <DndContext
           sensors={sensors}
           onDragEnd={(event: DragEndEvent) => {
@@ -99,7 +99,7 @@ const Page = () => {
               items={components.map((item) => item.id)}
               strategy={verticalListSortingStrategy}
             >
-              <ul className="h-full min-h-[700px] w-full flex flex-col gap-4 border bg-background border-border rounded-md px-4 py-8">
+              <ul className="h-full min-h-[700px] w-full flex flex-col gap-4 border bg-background border-border border-dashed rounded-md px-4 py-8">
                 {components.map(
                   (component) =>
                     component !== undefined && (
@@ -113,21 +113,16 @@ const Page = () => {
                 )}
                 {components.length === 0 && (
                   <div className="w-full h-full flex items-center text-center justify-center flex-col my-auto space-y-5">
-                    <Image
-                      src={empty.src}
-                      alt="Empty"
-                      width={300}
-                      height={300}
-                      priority
-                      className="h-auto"
-                    />
+                    <UploadIcon size={42} className="text-primary" />
                     <div className="space-y-8">
                       <h1 className="text-foreground text-2xl font-medium">
                         The form is empty
                       </h1>
                       <span className="text-muted-foreground">
-                        Try <strong className="text-primary">dropping</strong> a
-                        component to build the form.
+                        <strong className="text-foreground">
+                          Drag and drop {''}
+                        </strong>
+                        components here to build your form.
                       </span>
                     </div>
                   </div>
@@ -135,10 +130,13 @@ const Page = () => {
               </ul>
             </SortableContext>
           </Droppable>
-          <div className="w-1/4 h-full min-h-[600px] grid grid-cols-2 gap-16 ">
-            {availableComponents.map((item) => (
-              <Draggable key={item.name} id={item.name} icon={item.icon} />
-            ))}
+          <div className="flex flex-col">
+            <h1 className="text-2xl font-semibold">Draggable components</h1>
+            <ScrollArea className="h-full max-h-[600px] p-4 flex flex-col gap-12">
+              {availableComponents.map((item) => (
+                <Draggable key={item.name} id={item.name} icon={item.icon} />
+              ))}
+            </ScrollArea>
           </div>
         </DndContext>
       </div>
