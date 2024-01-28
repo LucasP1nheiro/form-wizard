@@ -42,6 +42,10 @@ export interface RadioGroupProps {
   required?: boolean
 }
 
+export interface ParagraphProps {
+  text: string
+}
+
 export type ComponentPropsMap = {
   title: TitleProps
   subtitle: SubtitleProps
@@ -51,6 +55,7 @@ export type ComponentPropsMap = {
   select: SelectProps
   'check box': CheckboxProps
   'radio group': RadioGroupProps
+  paragraph: ParagraphProps
 }
 
 export type ComponentProps<Type extends keyof ComponentPropsMap> = {

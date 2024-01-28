@@ -12,6 +12,8 @@ import DatePickerFields from '@/components/fields/datepicker-fields'
 import SelectFields from '@/components/fields/select-fields'
 import CheckboxFields from '@/components/fields/checkbox-fields'
 import RadioGroupFields from '@/components/fields/radio-group-fields'
+import { ImParagraphLeft } from 'react-icons/im'
+import ParagraphFields from '@/components/fields/paragraph.fields'
 
 export interface AvailableComponentsProps {
   name: string
@@ -26,6 +28,7 @@ export interface AvailableComponentsProps {
     | 'input'
     | 'date picker'
     | 'radio group'
+    | 'paragraph'
 }
 
 export const availableComponents: AvailableComponentsProps[] = [
@@ -40,6 +43,12 @@ export const availableComponents: AvailableComponentsProps[] = [
     icon: <TbH2 size={28} />,
     sheetContent: (id: string) => <SubtitleFields id={id} />,
     type: 'subtitle',
+  },
+  {
+    name: 'Paragraph field',
+    icon: <ImParagraphLeft size={28} />,
+    sheetContent: (id: string) => <ParagraphFields id={id} />,
+    type: 'paragraph',
   },
   {
     name: 'Input field',

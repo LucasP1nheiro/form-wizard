@@ -13,6 +13,7 @@ import {
   ComponentPropsMap,
   DatePickerProps,
   InputProps,
+  ParagraphProps,
   RadioGroupProps,
   SelectProps,
   SubtitleProps,
@@ -175,6 +176,12 @@ export function PreviewComponents({
           </RadioGroup>
         </div>
       )
+    }
+
+    case 'paragraph': {
+      const props = currentComponent?.props as ParagraphProps
+
+      return <p className="text-muted-foreground">{props.text}</p>
     }
   }
 }
