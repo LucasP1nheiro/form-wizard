@@ -94,7 +94,7 @@ const Page = () => {
             items={components.map((item) => item.id)}
             strategy={verticalListSortingStrategy}
           >
-            <ul className="h-full min-h-[700px] w-full flex flex-col gap-4 border bg-accent border-border rounded-md px-4 py-8">
+            <ul className="h-full min-h-[700px] w-full flex flex-col gap-4 border bg-background border-border rounded-md px-4 py-8">
               {components.map(
                 (component) =>
                   component !== undefined && (

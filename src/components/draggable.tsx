@@ -30,7 +30,7 @@ export default function Draggable({ id, icon }: DraggableProps) {
       <div
         ref={setNodeRef}
         className={cn(
-          'bg-accent border border-border text-md p-4 rounded-md py-8 flex flex-col justify-center items-center gap-2',
+          'bg-background border border-border text-md p-4 rounded-md py-8 flex flex-col justify-center items-center gap-2',
           {
             'ring-4 ring-primary': isDragging,
             'hover:bg-secondary/50 duration-300 transition-all': !isDragging,
