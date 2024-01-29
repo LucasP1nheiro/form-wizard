@@ -13,7 +13,7 @@ import SelectFields from '@/components/fields/select-fields'
 import CheckboxFields from '@/components/fields/checkbox-fields'
 import RadioGroupFields from '@/components/fields/radio-group-fields'
 import { ImParagraphLeft } from 'react-icons/im'
-import ParagraphFields from '@/components/fields/paragraph.fields'
+import ParagraphFields from '@/components/fields/paragraph-fields'
 
 export interface AvailableComponentsProps {
   name: string
