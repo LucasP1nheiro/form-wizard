@@ -21,6 +21,7 @@ export interface TextareaProps {
 
 export interface DatePickerProps {
   label: string
+  placeholder: string
   required?: boolean
 }
 

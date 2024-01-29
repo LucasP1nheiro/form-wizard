@@ -27,9 +27,23 @@ const DatePickerFields = ({ id }: { id: string }) => {
       ),
     )
   }
+  const handlePlaceholderChange = (text: string) => {
+    setComponents(
+      components.map((item) =>
+        item.id === id
+          ? { ...item, props: { ...props, placeholder: text } }
+          : item,
+      ),
+    )
+  }
 
   return (
     <div className="space-y-4">
+      <Input
+        placeholder="Add a placeholder for this date picker field"
+        onChange={(e) => handlePlaceholderChange(e.target.value)}
+        value={props.placeholder}
+      />
       <Input
         placeholder="Add a label for this date picker field"
         onChange={(e) => handleLabelChange(e.target.value)}
