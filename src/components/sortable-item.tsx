@@ -31,6 +31,7 @@ interface SortableItemsProps {
     | 'input'
     | 'date picker'
     | 'radio group'
+    | 'paragraph'
 }
 
 export function SortableItem({ deleteItem, id, type }: SortableItemsProps) {
