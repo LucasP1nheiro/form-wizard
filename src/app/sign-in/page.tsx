@@ -1,53 +1,15 @@
-'use client'
-
-import { Label } from '@/components/ui/label'
-import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { z } from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
 import Image from 'next/image'
 import logo from '@/assets/logo.svg'
 import Link from 'next/link'
-import supabase from '../../../supabase'
 import { Boxes } from '@/components/ui/background-boxes'
-
-const emailSchema = z.object({
-  email: z.string().email({
-    message: 'This email is not valid.',
-  }),
-})
-
-type EmailSchema = z.infer<typeof emailSchema>
+import { SignInForm } from './sign-in-form'
 
 export default function Page() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<EmailSchema>({
-    resolver: zodResolver(emailSchema),
-  })
-
-  const handleLogin = async ({ email }: EmailSchema) => {
-    if (!errors.email) {
-      const { data, error } = await supabase.auth.signInWithOtp({
-        email,
-      })
-
-      if (error) {
-        console.error(error)
-      } else {
-        console.log(data)
-      }
-    }
-  }
-
   return (
     <main className="w-screen h-screen max-h-screen overflow-hidden flex items-center justify-center relative">
       <div className="absolute inset-0 w-full h-full bg-background/90 z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />
       <Boxes />
-
       <div className="flex items-center flex-col gap-8 bg-background/20 backdrop-blur-lg w-full 2xl:w-1/4 lg:w-1/2 p-4 border rounded-md border-border z-50  shadow-lg">
         <Button asChild variant={'ghost'} className="p-1">
           <Link href="/" className="flex items-center gap-2">
@@ -69,32 +31,9 @@ export default function Page() {
               Enter your email below to sign in to your account
             </p>
           </div>
-          <form
-            onSubmit={handleSubmit(handleLogin)}
-            className="space-y-8 w-full"
-          >
-            <div className="space-y-3">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                placeholder="email@example.com"
-                required
-                type="email"
-                {...register('email')}
-              />
-              {errors.email && (
-                <p className="text-md text-red-500">{errors.email.message}</p>
-              )}
-            </div>
-
-            <Button
-              type="submit"
-              className="bg-emerald-600 border border-emerald-200 w-full"
-            >
-              Sing In
-            </Button>
-          </form>
         </div>
+
+        <SignInForm />
 
         <p>
           Don&apos;t have an account?{' '}
