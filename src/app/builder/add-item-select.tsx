@@ -71,7 +71,7 @@ export function AddItemSelect() {
                 >
                   <FormControl>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select a verified email to display" />
+                      <SelectValue placeholder="Select an item to be added into the form." />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
