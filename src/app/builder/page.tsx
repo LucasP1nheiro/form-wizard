@@ -23,6 +23,7 @@ import { Preview } from '@/components/preview'
 import { UploadIcon } from 'lucide-react'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { CreateFormDialog } from './create-form-dialog'
+import { AddItemSelect } from './add-item-select'
 
 const Page = () => {
   const { components, setComponents } = useComponentStore()
@@ -75,12 +76,13 @@ const Page = () => {
 
   return (
     <main className="w-screen min-h-screen bg-background py-32 space-y-5 p-4">
-      <div className="lg:w-4/5 w-full mx-auto flex flex-col lg:flex-row items-center gap-2">
+      <div className="lg:w-4/5 w-full mx-auto flex flex-col lg:flex-row items-center gap-4 justify-end">
         <Preview />
         <CreateFormDialog />
+        <AddItemSelect />
       </div>
 
-      <div className="flex items-start w-4/5 justify-between mx-auto flex-col lg:flex-row">
+      <div className="flex items-start w-full lg:w-4/5 justify-between gap-8 mx-auto flex-col lg:flex-row">
         <DndContext
           sensors={sensors}
           onDragEnd={(event: DragEndEvent) => {
@@ -97,6 +99,20 @@ const Page = () => {
             return handleSorting(event)
           }}
         >
+          <aside className="lg:flex flex-col hidden w-1/3">
+            <h1 className="2xl:text-2xl text-lg font-bold">Components</h1>
+            <p>
+              Here&apos;s a list of components you can add to the form. To add,
+              just{' '}
+              <strong className="text-primary font-bold">drag and drop</strong>{' '}
+              them into the droppable area.
+            </p>
+            <ScrollArea className="h-full max-h-[600px] py-4 pr-4 flex flex-col gap-12">
+              {availableComponents.map((item) => (
+                <Draggable key={item.name} id={item.name} icon={item.icon} />
+              ))}
+            </ScrollArea>
+          </aside>
           <Droppable>
             <SortableContext
               items={components.map((item) => item.id)}
@@ -117,15 +133,18 @@ const Page = () => {
                 {components.length === 0 && (
                   <div className="w-full h-full flex items-center text-center justify-center flex-col my-auto space-y-5">
                     <UploadIcon size={42} className="text-primary" />
-                    <div className="space-y-8">
+                    <div className="space-y-4">
                       <h1 className="text-foreground text-2xl font-medium">
                         The form is empty
                       </h1>
-                      <span className="text-muted-foreground">
-                        <strong className="text-foreground">
+                      <span className="text-muted-foreground hidden lg:block">
+                        <strong className="text-primary font-bold">
                           Drag and drop {''}
                         </strong>
                         components here to build your form.
+                      </span>
+                      <span className="block lg:hidden">
+                        Add components here to build your form.
                       </span>
                     </div>
                   </div>
@@ -133,14 +152,16 @@ const Page = () => {
               </ul>
             </SortableContext>
           </Droppable>
-          <div className="lg:flex flex-col hidden">
-            <h1 className="text-2xl font-semibold">Draggable components</h1>
+          {/* <aside className="lg:flex flex-col hidden text-center">
+            <h1 className="2xl:text-2xl text-lg font-semibold">
+              Draggable components
+            </h1>
             <ScrollArea className="h-full max-h-[600px] p-4 flex flex-col gap-12">
               {availableComponents.map((item) => (
                 <Draggable key={item.name} id={item.name} icon={item.icon} />
               ))}
             </ScrollArea>
-          </div>
+          </aside> */}
         </DndContext>
       </div>
     </main>

@@ -17,7 +17,7 @@ export default function Droppable({ children }: { children: React.ReactNode }) {
     <section
       ref={setNodeRef}
       className={cn(
-        'w-2/3 h-full rounded-md flex flex-col items-center justify-center',
+        'lg:w-2/3 w-full h-full rounded-md flex flex-col items-center justify-center',
         {
           'ring-4 ring-primary bg-primary/10':
             over?.id === id || isOverAnotherItem,
