@@ -18,39 +18,40 @@ export function Preview() {
   const { components } = useComponentStore()
 
   return (
-    <div>
-      <Dialog>
-        <DialogTrigger asChild>
-          <Button variant="outline" className="gap-2">
-            <Eye />
-            Preview
-          </Button>
-        </DialogTrigger>
-        <DialogContent className="min-w-96 border border-border">
-          <DialogHeader>
-            <DialogTitle>Preview</DialogTitle>
-            <DialogDescription>
-              Here&apos;s a brief preview of what your form looks like.
-            </DialogDescription>
-          </DialogHeader>
-          {components.length > 0 && (
-            <div className="space-y-4">
-              <ScrollArea className="w-full h-full max-h-[600px] rounded-md border border-border p-4 flex flex-col">
-                {components.map((component) => (
-                  <div className="px-4 py-2" key={component.id}>
-                    <PreviewComponents component={component} />
-                  </div>
-                ))}
-              </ScrollArea>
-            </div>
-          )}
-          <DialogFooter>
-            <DialogClose asChild>
-              <Button>Confirm</Button>
-            </DialogClose>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-    </div>
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button
+          variant="outline"
+          className="flex items-center gap-2 w-full lg:w-fit"
+        >
+          <Eye />
+          Preview
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="min-w-96 border border-border">
+        <DialogHeader>
+          <DialogTitle>Preview</DialogTitle>
+          <DialogDescription>
+            Here&apos;s a brief preview of what your form looks like.
+          </DialogDescription>
+        </DialogHeader>
+        {components.length > 0 && (
+          <div className="space-y-4">
+            <ScrollArea className="w-full h-full max-h-[600px] rounded-md border border-border p-4 flex flex-col">
+              {components.map((component) => (
+                <div className="px-4 py-2" key={component.id}>
+                  <PreviewComponents component={component} />
+                </div>
+              ))}
+            </ScrollArea>
+          </div>
+        )}
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button>Confirm</Button>
+          </DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   )
 }

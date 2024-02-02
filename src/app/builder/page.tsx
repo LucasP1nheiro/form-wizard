@@ -22,6 +22,7 @@ import { generateRandomString } from '@/utils/generate-random-string'
 import { Preview } from '@/components/preview'
 import { UploadIcon } from 'lucide-react'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import { CreateFormDialog } from './create-form-dialog'
 
 const Page = () => {
   const { components, setComponents } = useComponentStore()
@@ -73,11 +74,13 @@ const Page = () => {
   }
 
   return (
-    <main className="w-screen min-h-screen bg-background py-32 space-y-5">
-      <div className="w-4/5 mx-auto">
+    <main className="w-screen min-h-screen bg-background py-32 space-y-5 p-4">
+      <div className="lg:w-4/5 w-full mx-auto flex flex-col lg:flex-row items-center gap-2">
         <Preview />
+        <CreateFormDialog />
       </div>
-      <div className="flex items-start w-4/5 justify-between mx-auto">
+
+      <div className="flex items-start w-4/5 justify-between mx-auto flex-col lg:flex-row">
         <DndContext
           sensors={sensors}
           onDragEnd={(event: DragEndEvent) => {
@@ -130,7 +133,7 @@ const Page = () => {
               </ul>
             </SortableContext>
           </Droppable>
-          <div className="flex flex-col">
+          <div className="lg:flex flex-col hidden">
             <h1 className="text-2xl font-semibold">Draggable components</h1>
             <ScrollArea className="h-full max-h-[600px] p-4 flex flex-col gap-12">
               {availableComponents.map((item) => (
