@@ -6,13 +6,15 @@ import {
   CardContent,
   CardFooter,
 } from '@/components/ui/card'
-import supabase from '@/lib/supabase-browser'
 import Link from 'next/link'
 import { Plus } from 'lucide-react'
 import { Suspense } from 'react'
 import Loading from './forms-loading'
+import createClient from '@/lib/supabase-server'
 
 export default async function Home() {
+  const supabase = createClient()
+
   const { data: forms } = await supabase
     .from('forms')
     .select()
