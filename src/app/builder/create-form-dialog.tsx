@@ -11,13 +11,16 @@ import {
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
-import supabase from '@/lib/supabase-browser'
+import { createForm } from '@/data/forms'
 import { cn } from '@/lib/utils'
 import { useComponentStore } from '@/store/components'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { RocketIcon, Upload } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+import { toast } from 'sonner'
+import { useRouter } from 'next/navigation'
 
 const formSchema = z.object({
   name: z.string().min(1, 'Add a name to this form'),
@@ -37,7 +40,41 @@ export function CreateFormDialog() {
     resolver: zodResolver(formSchema),
   })
 
-  const { components } = useComponentStore()
+  const queryClient = useQueryClient()
+
+  const { components, setComponents } = useComponentStore()
+
+  const router = useRouter()
+
+  const { mutateAsync: createFormFn } = useMutation({
+    mutationFn: createForm,
+    onSuccess: (_, variables) => {
+      queryClient.setQueryData(['forms'], (data) => {
+        return [
+          ...(data as []),
+          {
+            name: variables.name,
+            description: variables.description,
+            fields: variables.fields,
+          },
+        ]
+      })
+
+      setComponents([])
+
+      toast('Form created.!', {
+        icon: <RocketIcon className="h-4 w-4" />,
+        description: `The form ${variables.name} was created successfully.`,
+      })
+
+      router.push('/')
+    },
+    onError: () => {
+      toast.error('Error', {
+        description: `Something went wrong on creating this form`,
+      })
+    },
+  })
 
   const handleCreateForm = async ({ name, description }: FormSchema) => {
     if (errors.root) {
@@ -46,7 +83,7 @@ export function CreateFormDialog() {
 
     const fields = JSON.stringify(components)
 
-    await supabase.from('forms').insert({ name, description, fields })
+    await createFormFn({ name, description, fields })
   }
 
   const isFormEmpty = components.length === 0

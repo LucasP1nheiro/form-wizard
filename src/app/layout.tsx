@@ -5,6 +5,8 @@ import Header from '@/components/header'
 import { ThemeProvider } from '@/components/theme-provider'
 import icon from '@/app/favicon.ico'
 import createClient from '@/lib/supabase-server'
+import { ReactQueryClienProvider } from '@/components/react-query-client-provider'
+import { Toaster } from '@/components/ui/sonner'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -30,10 +32,13 @@ export default async function RootLayout({
     <html lang="en">
       <link rel="icon" href={icon.src} />
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <Header user={user} />
-          {children}
-        </ThemeProvider>
+        <ReactQueryClienProvider>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <Header user={user} />
+            {children}
+            <Toaster />
+          </ThemeProvider>
+        </ReactQueryClienProvider>
       </body>
     </html>
   )
