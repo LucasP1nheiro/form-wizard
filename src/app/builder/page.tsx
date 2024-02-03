@@ -20,10 +20,11 @@ import { getEmptyProps } from '@/utils/get-empty-props'
 import { useComponentStore } from '@/store/components'
 import { generateRandomString } from '@/utils/generate-random-string'
 import { Preview } from '@/components/preview'
-import { UploadIcon } from 'lucide-react'
+import { Lightbulb, UploadIcon } from 'lucide-react'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { CreateFormDialog } from './create-form-dialog'
 import { AddItemSelect } from './add-item-select'
+import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert'
 
 const Page = () => {
   const { components, setComponents } = useComponentStore()
@@ -99,7 +100,7 @@ const Page = () => {
             return handleSorting(event)
           }}
         >
-          <aside className="lg:flex flex-col hidden w-1/3">
+          <aside className="lg:flex flex-col hidden w-1/3 gap-3">
             <h1 className="2xl:text-2xl text-lg font-bold">Components</h1>
             <p>
               Here&apos;s a list of components you can add to the form. To add,
@@ -107,6 +108,14 @@ const Page = () => {
               <strong className="text-primary font-bold">drag and drop</strong>{' '}
               them into the droppable area.
             </p>
+            <Alert className="border border-border">
+              <Lightbulb className="w-4 h-4 stroke-primary" />
+              <AlertTitle>Quick Tip</AlertTitle>
+              <AlertDescription>
+                After adding a component, explore its settings to customize its
+                properties.
+              </AlertDescription>
+            </Alert>
             <ScrollArea className="h-full max-h-[600px] py-4 pr-4 flex flex-col gap-12">
               {availableComponents.map((item) => (
                 <Draggable key={item.name} id={item.name} icon={item.icon} />
@@ -118,7 +127,7 @@ const Page = () => {
               items={components.map((item) => item.id)}
               strategy={verticalListSortingStrategy}
             >
-              <ul className="h-full min-h-[700px] w-full flex flex-col gap-4 border bg-background border-border border-dashed rounded-md px-4 py-8">
+              <ul className="h-full min-h-[800px] w-full flex flex-col gap-4 border bg-background border-border border-dashed rounded-md px-4 py-8">
                 {components.map(
                   (component) =>
                     component !== undefined && (
@@ -152,16 +161,6 @@ const Page = () => {
               </ul>
             </SortableContext>
           </Droppable>
-          {/* <aside className="lg:flex flex-col hidden text-center">
-            <h1 className="2xl:text-2xl text-lg font-semibold">
-              Draggable components
-            </h1>
-            <ScrollArea className="h-full max-h-[600px] p-4 flex flex-col gap-12">
-              {availableComponents.map((item) => (
-                <Draggable key={item.name} id={item.name} icon={item.icon} />
-              ))}
-            </ScrollArea>
-          </aside> */}
         </DndContext>
       </div>
     </main>
