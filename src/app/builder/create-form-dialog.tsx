@@ -21,12 +21,17 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
+import { Database } from '@/db/schema'
+import { ClipLoader } from 'react-spinners'
+
+type Form = Database['public']['Tables']['forms']['Row']
 
 const formSchema = z.object({
   name: z.string().min(1, 'Add a name to this form'),
   description: z
     .string()
-    .min(10, 'The description has to be at least 10 characters'),
+    .min(10, 'The description has to be at least 10 characters')
+    .max(100, 'The description has to be 100 characters maximum.'),
 })
 
 type FormSchema = z.infer<typeof formSchema>
@@ -46,12 +51,12 @@ export function CreateFormDialog() {
 
   const router = useRouter()
 
-  const { mutateAsync: createFormFn } = useMutation({
+  const { mutateAsync: createFormFn, isPending } = useMutation({
     mutationFn: createForm,
     onSuccess: (_, variables) => {
-      queryClient.setQueryData(['forms'], (data) => {
+      queryClient.setQueryData(['forms'], (data: Form[]) => {
         return [
-          ...(data as []),
+          ...data,
           {
             name: variables.name,
             description: variables.description,
@@ -140,10 +145,11 @@ export function CreateFormDialog() {
 
           <Button
             type="submit"
-            className="border border-emerald-200 bg-emerald-600  w-full"
+            className="border border-emerald-200 bg-emerald-600  w-full flex items-center gap-2"
             disabled={isFormEmpty}
           >
-            Save
+            <ClipLoader size={18} color="secondary" />
+            <p>Save</p>
           </Button>
         </form>
         {isFormEmpty && (
