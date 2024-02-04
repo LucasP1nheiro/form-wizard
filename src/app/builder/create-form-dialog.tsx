@@ -62,7 +62,7 @@ export function CreateFormDialog() {
 
       setComponents([])
 
-      toast('Form created.!', {
+      toast('Form created!', {
         icon: <RocketIcon className="h-4 w-4" />,
         description: `The form ${variables.name} was created successfully.`,
       })
