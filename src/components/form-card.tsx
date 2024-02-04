@@ -2,8 +2,11 @@ import Link from 'next/link'
 
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from './ui/card'
 import { Button } from './ui/button'
+import { Database } from '@/db/schema'
 
-export function FormCard({ form }: { form: any }) {
+type Form = Database['public']['Tables']['forms']['Row']
+
+export function FormCard({ form }: { form: Form }) {
   return (
     <Card className="border border-border bg-background">
       <CardHeader>
@@ -18,7 +21,7 @@ export function FormCard({ form }: { form: any }) {
           asChild
           variant="default"
         >
-          <Link href={`/forms/${form.share_url}}`}>
+          <Link href={`/share/${form.share_url}`}>
             <p>See More</p>
           </Link>
         </Button>
