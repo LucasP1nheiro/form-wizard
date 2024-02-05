@@ -148,7 +148,7 @@ export function CreateFormDialog() {
             className="border border-emerald-200 bg-emerald-600  w-full flex items-center gap-2"
             disabled={isFormEmpty}
           >
-            <ClipLoader size={18} color="secondary" />
+            {isPending && <ClipLoader size={18} color="secondary" />}
             <p>Save</p>
           </Button>
         </form>
