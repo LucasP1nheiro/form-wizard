@@ -7,6 +7,10 @@ interface CreateFormRequest {
   fields: Json
 }
 
+interface DeleteFormRequest {
+  formId: number
+}
+
 export async function getForms() {
   const { data: forms } = await supabase
     .from('forms')
@@ -22,4 +26,8 @@ export async function createForm({
   fields,
 }: CreateFormRequest) {
   await supabase.from('forms').insert({ name, description, fields })
+}
+
+export async function deleteForm({ formId }: DeleteFormRequest) {
+  await supabase.from('forms').delete().eq('id', formId)
 }
