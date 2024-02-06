@@ -39,6 +39,35 @@ export interface Database {
         }
         Relationships: []
       }
+      replys: {
+        Row: {
+          answers: Json
+          created_at: string
+          form_id: number
+          id: number
+        }
+        Insert: {
+          answers: Json
+          created_at?: string
+          form_id: number
+          id?: number
+        }
+        Update: {
+          answers?: Json
+          created_at?: string
+          form_id?: number
+          id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'replys_form_id_fkey'
+            columns: ['form_id']
+            isOneToOne: false
+            referencedRelation: 'forms'
+            referencedColumns: ['id']
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never

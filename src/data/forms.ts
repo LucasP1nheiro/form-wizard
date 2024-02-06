@@ -23,12 +23,3 @@ export async function createForm({
 }: CreateFormRequest) {
   await supabase.from('forms').insert({ name, description, fields })
 }
-
-export async function getFormByShareUrl({ shareUrl }: { shareUrl: string }) {
-  const { data } = await supabase
-    .from('forms')
-    .select()
-    .match({ share_url: shareUrl })
-
-  return data
-}

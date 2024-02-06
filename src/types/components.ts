@@ -9,13 +9,13 @@ export interface SubtitleProps {
 export interface InputProps {
   label: string
   type?: string
-  placeholder?: string
+  placeholder: string
   required?: boolean
 }
 
 export interface TextareaProps {
   label: string
-  placeholder?: string
+  placeholder: string
   required?: boolean
 }
 
