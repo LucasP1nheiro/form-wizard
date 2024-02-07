@@ -3,7 +3,7 @@
 import { getForms } from '@/data/forms'
 import { useQuery } from '@tanstack/react-query'
 import { FormCard } from './form-card'
-import FormsLoading from '@/app/forms-loading'
+import FormsLoading from '@/components/loading/forms-loading'
 import {
   Carousel,
   CarouselContent,
