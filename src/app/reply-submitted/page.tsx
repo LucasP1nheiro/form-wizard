@@ -7,11 +7,6 @@ import { Boxes } from '@/components/ui/background-boxes'
 
 const Page = () => {
   return (
-    // <main className="w-screeen h-screen flex items-center justify-center flex-col gap-4 bg-background">
-    //   <Check size={60} className="stroke-primary" />
-    //   <h1 className="text-3xl font-bold">Thank You</h1>
-    //   <p>Your response has been successfully submitted!</p>
-    // </main>
     <main className="w-screen h-screen max-h-screen overflow-hidden flex items-center justify-center relative p-4">
       <div className="absolute inset-0 w-full h-full bg-background/90 z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />
       <Boxes />
@@ -39,12 +34,6 @@ const Page = () => {
           </div>
         </div>
 
-        {/* <p>
-          Don&apos;t have an account?{' '}
-          <Link href="sign-up">
-            <strong>Sign Up</strong>
-          </Link>
-        </p> */}
         <div className="flex items-center gap-2">
           <Button>Home</Button>
           <Button variant={'outline'}>Sign in</Button>
