@@ -22,7 +22,7 @@ export default function Page() {
               priority
               quality={100}
             />
-            <span className="font-bold">Form Builder</span>
+            <span className="font-bold">Form Wizard</span>
           </Link>
         </Button>
         <div className="w-full flex flex-col items-center justify-center gap-12">
