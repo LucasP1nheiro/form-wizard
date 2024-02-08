@@ -15,7 +15,12 @@ import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { Copy, LinkIcon } from 'lucide-react'
 import { toast } from 'sonner'
 
-export function ShareForm({ shareUrl }: { shareUrl: string }) {
+interface ShareFormProps {
+  shareUrl: string
+  text?: string
+}
+
+export function ShareForm({ shareUrl, text }: ShareFormProps) {
   const currentURL = window.location.origin
 
   const sendToast = () => {
@@ -25,8 +30,8 @@ export function ShareForm({ shareUrl }: { shareUrl: string }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline" size={'icon'}>
-          <LinkIcon />
+        <Button variant="outline" size={text ? 'sm' : 'icon'}>
+          {text ?? <LinkIcon />}
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md border-border">

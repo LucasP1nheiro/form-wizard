@@ -13,30 +13,23 @@ import {
   ResponsiveContainer,
 } from 'recharts'
 import CustomTooltip from './custom-tooltip'
-import { LineChartLoading } from '../loading/line-chart-loading'
 
 type Reply = Database['public']['Tables']['replys']['Row']
-type Form = Database['public']['Tables']['forms']['Row']
 
 interface SubmissionsLineChartProps {
-  form: Form
+  formName: string
+  replies: Reply[]
 }
 
-const SubmissionsLineChart = ({ form }: SubmissionsLineChartProps) => {
-  const { data: replys, isLoading } = useQuery({
-    queryKey: ['replys'],
-    queryFn: () => getReplysByFormId({ formId: form.id }),
-  })
-
-  if (isLoading) {
-    return <LineChartLoading />
-  }
-
-  if (!replys || replys === undefined || replys.length === 0) {
+const SubmissionsLineChart = ({
+  formName,
+  replies,
+}: SubmissionsLineChartProps) => {
+  if (!replies || replies === undefined || replies.length === 0) {
     return null
   }
 
-  const groupedReplies: { [key: string]: Reply[] } = replys.reduce(
+  const groupedReplies: { [key: string]: Reply[] } = replies.reduce(
     (acc: { [key: string]: Reply[] }, reply) => {
       const date = formatDate(new Date(reply.created_at), 'PPP')
       if (!acc[date]) {
@@ -60,7 +53,7 @@ const SubmissionsLineChart = ({ form }: SubmissionsLineChartProps) => {
       </h1>
       <p className="text-muted-foreground text-center lg:text-start">
         This chart displays the number of submissions over time from the form{' '}
-        <strong className="text-primary">{form.name}</strong>.
+        <strong className="text-primary">{formName}</strong>.
       </p>
       <ResponsiveContainer width={'100%'}>
         <LineChart
