@@ -15,11 +15,20 @@ import SubmissionsLineChart from './charts/submissions-line-chart'
 import { Button } from './ui/button'
 import Link from 'next/link'
 import { Library, Plus } from 'lucide-react'
+import { getReplysByFormId } from '@/data/replys'
 
 const Forms = () => {
   const { data: forms, isLoading } = useQuery({
     queryKey: ['forms'],
     queryFn: getForms,
+  })
+
+  const lastFormCreatedId = forms ? forms[0].id : null
+
+  const { data: replies } = useQuery({
+    queryKey: ['replies', lastFormCreatedId],
+    queryFn: () => getReplysByFormId({ formId: lastFormCreated.id }),
+    enabled: lastFormCreatedId !== null,
   })
 
   if (isLoading) {
@@ -88,7 +97,12 @@ const Forms = () => {
         <CarouselPrevious className="hidden lg:flex" />
         <CarouselNext className="hidden lg:flex" />
       </Carousel>
-      <SubmissionsLineChart form={lastFormCreated} />
+      {replies && (
+        <SubmissionsLineChart
+          formName={lastFormCreated.name}
+          replies={replies}
+        />
+      )}
     </div>
   )
 }
