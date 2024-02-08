@@ -11,6 +11,10 @@ import {
   CarouselPrevious,
   CarouselNext,
 } from './ui/carousel'
+import SubmissionsLineChart from './charts/submissions-line-chart'
+import { Button } from './ui/button'
+import Link from 'next/link'
+import { Library, Plus } from 'lucide-react'
 
 const Forms = () => {
   const { data: forms, isLoading } = useQuery({
@@ -29,8 +33,38 @@ const Forms = () => {
     )
   }
 
+  if (!forms || forms === undefined || forms.length === 0) {
+    return (
+      <div className="lg:w-4/5 mx-auto flex items-center gap-4 flex-col my-48 text-center w-full">
+        <Library className="stroke-primary" size={32} />
+        <h1 className="text-2xl font-extrabold">No forms</h1>
+        <p>
+          Get started creating a new{' '}
+          <strong className="text-primary">form</strong>
+        </p>
+
+        <Button
+          asChild
+          className="border border-emerald-200 bg-emerald-600 w-full lg:w-fit"
+        >
+          <Link href="/builder" className="flex items-center gap-2">
+            <Plus size={18} />
+            <p>New form</p>
+          </Link>
+        </Button>
+      </div>
+    )
+  }
+
+  const lastFormCreated = forms.reduce((prevForm, currentForm) => {
+    const prevDate = new Date(prevForm.created_at)
+    const currentDate = new Date(currentForm.created_at)
+
+    return prevDate > currentDate ? prevForm : currentForm
+  })
+
   return (
-    <div className="lg:w-4/5 mx-auto space-y-8 w-full">
+    <div className="lg:w-4/5 mx-auto space-y-16 w-full">
       <h1 className="text-2xl font-extrabold text-center lg:text-start">
         Your Form Vault
       </h1>
@@ -54,6 +88,7 @@ const Forms = () => {
         <CarouselPrevious className="hidden lg:flex" />
         <CarouselNext className="hidden lg:flex" />
       </Carousel>
+      <SubmissionsLineChart form={lastFormCreated} />
     </div>
   )
 }

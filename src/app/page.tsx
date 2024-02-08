@@ -1,6 +1,5 @@
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import { Plus } from 'lucide-react'
 
 import Forms from '@/components/forms'
 
@@ -13,7 +12,6 @@ export default function Page() {
           className="border border-emerald-200 bg-emerald-600 w-full lg:w-fit"
         >
           <Link href="/builder" className="flex items-center gap-2">
-            <Plus size={18} />
             <p>New form</p>
           </Link>
         </Button>
