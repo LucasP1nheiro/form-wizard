@@ -30,6 +30,7 @@ const ReplyRadioGroup = ({
         id,
         label,
         value,
+        type: 'radio-group',
       }
       setReplyFields([...replyFields, newField])
     }

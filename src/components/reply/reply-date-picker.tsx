@@ -16,7 +16,6 @@ import { CalendarIcon } from 'lucide-react'
 import React, { useState } from 'react'
 import { ReplyFields } from '@/types/reply'
 import { useReplyFieldsStore } from '@/store/reply'
-import { undefined } from 'zod'
 
 interface ReplyDatePickerProps {
   id: string
@@ -31,31 +30,33 @@ const ReplyDatePicker = ({
   label,
   required,
 }: ReplyDatePickerProps) => {
-  const [date, setDate] = useState<Date | null>()
+  const [date, setDate] = useState<Date>(new Date())
 
   const { replyFields, setReplyFields } = useReplyFieldsStore()
 
-  const handleDateChange = (newDate: Date) => {
+  const handleDateChange = (newDate: Date | undefined) => {
+    if (newDate === undefined) {
+      return
+    }
     setDate(newDate)
 
-    if (date) {
-      const fieldIndex = replyFields.findIndex((field) => field.id === id)
+    const fieldIndex = replyFields.findIndex((field) => field.id === id)
 
-      if (fieldIndex !== -1) {
-        const updatedFields = [...replyFields]
-        updatedFields[fieldIndex] = {
-          ...updatedFields[fieldIndex],
-          value: date.toString(),
-        }
-        setReplyFields(updatedFields)
-      } else {
-        const newField: ReplyFields = {
-          id,
-          label,
-          value: date.toString(),
-        }
-        setReplyFields([...replyFields, newField])
+    if (fieldIndex !== -1) {
+      const updatedFields = [...replyFields]
+      updatedFields[fieldIndex] = {
+        ...updatedFields[fieldIndex],
+        value: date.toString(),
       }
+      setReplyFields(updatedFields)
+    } else {
+      const newField: ReplyFields = {
+        id,
+        label,
+        value: date.toString(),
+        type: 'date-picker',
+      }
+      setReplyFields([...replyFields, newField])
     }
   }
 
@@ -82,7 +83,7 @@ const ReplyDatePicker = ({
           <Calendar
             mode="single"
             selected={date || new Date()}
-            onDayClick={handleDateChange}
+            onSelect={handleDateChange}
             initialFocus
             className="bg-background z-50"
             required={required}

@@ -25,6 +25,7 @@ const ReplyCheckBox = ({ id, label }: ReplyCheckBoxProps) => {
         id,
         label,
         value,
+        type: 'check-box',
       }
       setReplyFields([...replyFields, newField])
     }

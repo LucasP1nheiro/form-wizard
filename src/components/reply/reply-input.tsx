@@ -34,6 +34,7 @@ const ReplyInput: React.FC<InputProps> = ({
         id,
         label,
         value,
+        type: 'input',
       }
       setReplyFields([...replyFields, newField])
     }

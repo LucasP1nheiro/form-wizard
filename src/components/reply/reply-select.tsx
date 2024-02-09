@@ -32,6 +32,7 @@ const ReplySelect = ({ id, label, options, required }: ReplySelectProps) => {
         id,
         label,
         value,
+        type: 'select',
       }
       setReplyFields([...replyFields, newField])
     }

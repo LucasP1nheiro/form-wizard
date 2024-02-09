@@ -28,6 +28,7 @@ const ReplyTextArea = ({ label, id, required, placeholder }: TextareaProps) => {
         id,
         label,
         value,
+        type: 'text-area',
       }
       setReplyFields([...replyFields, newField])
     }

@@ -1,6 +1,5 @@
 'use client'
 
-import SubmissionsLineChart from '@/components/charts/submissions-line-chart'
 import DeleteFormAlertDialog from '@/components/delete-form-alert-dialog'
 import RepliesFromForm from '@/components/reply/replies-from-form'
 import { ShareForm } from '@/components/share-form'

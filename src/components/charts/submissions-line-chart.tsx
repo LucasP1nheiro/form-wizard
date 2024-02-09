@@ -62,7 +62,7 @@ const SubmissionsLineChart = ({
         >
           <XAxis dataKey="date" />
           <YAxis />
-          <Tooltip content={<CustomTooltip />} />
+          <Tooltip content={<CustomTooltip text="Submissions" />} />
           <Legend />
           <Line
             type="monotone"
