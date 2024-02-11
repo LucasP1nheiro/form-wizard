@@ -30,11 +30,11 @@ const Page = ({ params: { id } }: PageProps) => {
   }
 
   return (
-    <main className="w-screen min-h-screen bg-background">
-      <div className="w-4/5 mx-auto min-h-screen py-32 space-y-20">
+    <main className="w-screen min-h-screen bg-background p-4">
+      <div className="lg:w-4/5 mx-auto min-h-screen py-32 space-y-20 w-full">
         <section className="space-y-6 w-full">
           <div className="w-full justify-between flex items-center">
-            <h1 className="text-3xl font-extrabold">{form?.name}</h1>
+            <h1 className="text-3xl font-extrabold truncate">{form?.name}</h1>
 
             <div className="flex items-center gap-2">
               {form?.share_url && <ShareForm shareUrl={form?.share_url} />}

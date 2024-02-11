@@ -4,14 +4,23 @@ import supabase from '@/lib/supabase-browser'
 interface CreateReplyRequest {
   answers: Json
   formId: number
+  name: string
+  email: string
 }
 
 interface GetReplysByFromIdRequest {
   formId: number
 }
 
-export async function createReply({ answers, formId }: CreateReplyRequest) {
-  await supabase.from('replys').insert({ answers, form_id: formId })
+export async function createReply({
+  answers,
+  formId,
+  name,
+  email,
+}: CreateReplyRequest) {
+  await supabase
+    .from('replys')
+    .insert({ answers, form_id: formId, name, email })
 }
 
 export async function getReplysByFormId({ formId }: GetReplysByFromIdRequest) {
@@ -19,6 +28,7 @@ export async function getReplysByFormId({ formId }: GetReplysByFromIdRequest) {
     .from('replys')
     .select()
     .match({ form_id: formId })
+    .order('created_at', { ascending: false })
 
   return replys
 }

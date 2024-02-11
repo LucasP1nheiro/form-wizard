@@ -2,11 +2,12 @@ import { getReplysByFormId } from '@/data/replys'
 import { Database } from '@/db/schema'
 import { useQuery } from '@tanstack/react-query'
 import React from 'react'
-import { FileX } from 'lucide-react'
+import { FileX, Rocket } from 'lucide-react'
 import { ShareForm } from '../share-form'
 import { ReplyFields } from '@/types/reply'
 import CustomBarChart from '../charts/custom-bar-chart'
 import SubmissionsLineChart from '../charts/submissions-line-chart'
+import ReplyTable from '../tables/reply-table'
 
 type Form = Database['public']['Tables']['forms']['Row']
 
@@ -42,7 +43,6 @@ const RepliesFromForm: React.FC<RepliesFromFormProps> = ({ form }) => {
     }))
   })
 
-  // Filter out fields with type 'input' or 'text-area'
   const filteredRepliesAnswers = repliesAnswers.filter(
     (field) =>
       field.type !== 'input' &&
@@ -71,6 +71,19 @@ const RepliesFromForm: React.FC<RepliesFromFormProps> = ({ form }) => {
 
   return (
     <div className="w-full space-y-12">
+      <div className="border border-border rounded-md p-4 w-fit space-y-5">
+        <div className="w-full flex items-center justify-between">
+          <h3 className="text-foreground font-semibold">Total submissions</h3>
+          <Rocket className="text-primary" size={24} />
+        </div>
+        <h1 className="text-5xl font-extrabold text-primary">
+          {replies.length}
+        </h1>
+        <p className="dark:text-muted-foreground">
+          Total submissions recorded from this form.
+        </p>
+      </div>
+      <ReplyTable replies={replies} />
       <SubmissionsLineChart formName={form.name} replies={replies} />
       <div className="w-full grid lg:grid-cols-2 grid-cols-1 gap-4">
         {Object.keys(groupedData).map((label, index) => (
