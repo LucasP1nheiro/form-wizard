@@ -34,7 +34,7 @@ interface ReplyTableProps {
 const ReplyTable = ({ replies }: ReplyTableProps) => {
   const pathname = usePathname()
 
-  const pageRange = 2
+  const pageRange = 5
 
   const totalPages = Math.ceil(replies.length / pageRange)
 
