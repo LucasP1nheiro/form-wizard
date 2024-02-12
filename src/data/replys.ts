@@ -12,6 +12,10 @@ interface GetReplysByFromIdRequest {
   formId: number
 }
 
+interface GetRepliesByShareUrl {
+  shareUrl: string
+}
+
 export async function createReply({
   answers,
   formId,
@@ -31,4 +35,13 @@ export async function getReplysByFormId({ formId }: GetReplysByFromIdRequest) {
     .order('created_at', { ascending: false })
 
   return replys
+}
+
+export async function getReplyByShareUrl({ shareUrl }: GetRepliesByShareUrl) {
+  const { data: reply } = await supabase
+    .from('replys')
+    .select()
+    .match({ share_url: shareUrl })
+
+  return reply
 }
