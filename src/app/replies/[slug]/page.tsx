@@ -4,7 +4,7 @@ import { getReplyByShareUrl } from '@/data/replys'
 import { ReplyFields } from '@/types/reply'
 import { useQuery } from '@tanstack/react-query'
 import React from 'react'
-import { BookText } from 'lucide-react'
+import { BookText, Clock, Mails, UserRound } from 'lucide-react'
 import { formatDate } from 'date-fns'
 
 interface PageProps {
@@ -38,19 +38,28 @@ const Page = ({ params: { slug } }: PageProps) => {
   })
 
   return (
-    <main className="min-h-screen w-screen bg-background py-32">
-      <div className="w-4/5 mx-auto space-y-12">
-        <div className="space-y-4">
-          <h1 className="text-3xl font-extrabold">Name</h1>
-          <p className="text-emerald-600 dark:text-primary">{reply.name}</p>
-        </div>
-        <div className="space-y-4">
-          <h1 className="text-3xl font-extrabold">Email</h1>
-          <p className="text-emerald-600 dark:text-primary">{reply.email}</p>
-        </div>
+    <main className="min-h-screen w-screen bg-background py-32 p-4">
+      <div className="lg:w-4/5 mx-auto space-y-12 w-full">
+        <section className="flex items-center justify-between flex-col xl:flex-row gap-8 xl:gap-0">
+          <div className="p-4 rounded-md border border-border w-full xl:w-[300px] flex items-center gap-4 truncate">
+            <UserRound className="text-primary" />
+            <p className="dark:text-muted-foreground">{reply.name}</p>
+          </div>
+          <div className="p-4 rounded-md border border-border w-full xl:w-[300px] flex items-center gap-4 truncate">
+            <Mails className="text-primary" />
+            <p className="dark:text-muted-foreground">{reply.email}</p>
+          </div>
 
-        <div className="flex items-center gap-4">
-          <BookText className="text-primary" size={24} />
+          <div className="p-4 rounded-md border border-border w-full xl:w-[300px] flex items-center gap-4 truncate">
+            <Clock className="text-primary" />
+            <p className="dark:text-muted-foreground">
+              {formatDate(reply.created_at, 'PPP')}
+            </p>
+          </div>
+        </section>
+
+        <div className="flex lg:items-center gap-4 flex-col lg:flex-row">
+          <BookText className="text-primary" size={36} />
           <h1 className="text-3xl font-extrabold">
             Here are the answers of this reply.
           </h1>
