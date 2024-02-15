@@ -69,7 +69,7 @@ export function Features() {
       <Spotlight className="w-full mx-auto grid gap-24 xl:grid-cols-2 py-32 place-items-center">
         {features.map((feature) => (
           <SpotlightCard
-            className="2xl:w-[650px] w-full group overflow-hidden h-[580px]"
+            className="2xl:w-[650px] w-full group overflow-hidden max-h-[580px]"
             key={feature.title}
           >
             <div className="relative h-full bg-background p-6 pb-8 rounded-[inherit] z-20 overflow-hidden">
