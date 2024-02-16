@@ -35,8 +35,12 @@ const Page = () => {
         </div>
 
         <div className="flex items-center gap-2">
-          <Button>Home</Button>
-          <Button variant={'outline'}>Sign in</Button>
+          <Button asChild variant={'secondary'}>
+            <Link href="/">Home</Link>
+          </Button>
+          <Button asChild variant={'outline'}>
+            <Link href="/sign-in">Sign in</Link>
+          </Button>
         </div>
       </div>
     </main>
