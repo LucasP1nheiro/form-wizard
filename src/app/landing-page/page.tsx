@@ -54,9 +54,9 @@ const Page = () => {
             </a>
             <TypewriterEffect
               words={words}
-              className="text-center xl:text-start"
+              className="text-center xl:text-start text-4xl"
             />
-            <p className="dark:text-muted-foreground text-lg">
+            <p className="dark:text-muted-foreground text-md">
               Drag-and-drop interface, customizable fields, real-time previews,
               analytics, and more.
             </p>
