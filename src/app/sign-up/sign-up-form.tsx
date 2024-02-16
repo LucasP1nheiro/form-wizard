@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button'
 import { z } from 'zod'
 import { cn } from '@/lib/utils'
 import { toast } from 'sonner'
+import console from 'console'
 
 const emailSchema = z
   .object({
@@ -44,6 +45,14 @@ export function SignUpForm() {
         email,
         password,
       })
+
+      const emailAlreadyExists =
+        data.user && data.user.identities && data.user.identities.length === 0
+
+      if (emailAlreadyExists) {
+        toast.error('Email already exists.')
+        return
+      }
 
       if (data && !error) {
         toast.info(
