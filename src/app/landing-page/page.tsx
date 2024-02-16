@@ -56,7 +56,7 @@ const Page = () => {
               words={words}
               className="text-center xl:text-start text-4xl"
             />
-            <p className="dark:text-muted-foreground text-md">
+            <p className="dark:text-muted-foreground text-md lg:text-lg">
               Drag-and-drop interface, customizable fields, real-time previews,
               analytics, and more.
             </p>
