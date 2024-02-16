@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { z } from 'zod'
 import { cn } from '@/lib/utils'
+import { toast } from 'sonner'
 
 const emailSchema = z
   .object({
@@ -37,21 +38,23 @@ export function SignUpForm() {
     resolver: zodResolver(emailSchema),
   })
 
-  const handleLogin = async ({ email, password }: EmailSchema) => {
+  const handleSignUp = async ({ email, password }: EmailSchema) => {
     if (!errors.confirmPassword && !errors.email && !errors.password) {
-      const { data } = await supabase.auth.signUp({
+      const { data, error } = await supabase.auth.signUp({
         email,
         password,
       })
 
-      if (data) {
-        console.log(data)
+      if (data && !error) {
+        toast.info(
+          'An email was sent to you. Check your inbox to finish the registration.',
+        )
       }
     }
   }
 
   return (
-    <form onSubmit={handleSubmit(handleLogin)} className="space-y-8 w-full">
+    <form onSubmit={handleSubmit(handleSignUp)} className="space-y-8 w-full">
       <div className="space-y-3">
         <Label htmlFor="email">Email</Label>
         <Input
