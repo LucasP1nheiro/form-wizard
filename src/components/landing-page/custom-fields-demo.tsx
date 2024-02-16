@@ -7,7 +7,7 @@ const CustomFieldsDemo = () => {
   return (
     <div className="w-full h-full">
       <div className="h-32 w-32 bg-emerald-300 rounded-full relative top-64 md:left-[450px] left-24 opacity-60" />
-      <div className="h-80 w-full rounded-lg bg-white/5 duration-300 transition-all border border-border relative left-16 bottom-8 group-hover:scale-105 backdrop-blur-xl z-30">
+      <div className="h-80 w-full rounded-lg bg-black/5 dark:bg-white/5 duration-300 transition-all border border-border relative left-16 bottom-8 group-hover:scale-105 backdrop-blur-xl z-30">
         <div className="h-8 border-b border-border w-full px-2 flex items-center gap-3 mb-5">
           <div className="w-4 h-4 rounded-full bg-emerald-500" />
           <div className="w-4 h-4 rounded-full bg-emerald-400" />

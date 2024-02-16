@@ -42,11 +42,11 @@ export function Features() {
 
   return (
     <section className="lg:w-4/5 mx-auto space-y-10 pt-48 w-full p-4">
-      <div className="w-fit mx-auto rounded-full bg-gradient-to-r my-2 from-emerald-200 to-emerald-500 p-[1px] brightness-90 contrast-150  dark:brightness-125 dark:contrast-100">
+      <div className="w-fit mx-auto rounded-full bg-gradient-to-r my-2 from-emerald-500 to-emerald-700 dark:from-emerald-200 dark:to-emerald-500 p-[1px] brightness-90 contrast-150  dark:brightness-125 dark:contrast-100">
         <div className="group relative overflow-hidden rounded-full bg-white/80 px-3 py-1 duration-300 dark:bg-black/80">
-          <span className="select-none bg-gradient-to-r from-emerald-200 to-emerald-500 bg-clip-text text-transparent">
+          <span className="select-none bg-gradient-to-r from-emerald-500 to-emerald-700 dark:from-emerald-200 dark:to-emerald-500 bg-clip-text text-transparent">
             <svg
-              className="mr-1 inline-block h-4 w-4 fill-emerald-200"
+              className="mr-1 inline-block h-4 w-4 dark:fill-emerald-200 fill-emerald-700"
               viewBox="4 4 48 48"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -58,7 +58,7 @@ export function Features() {
       </div>
       <h1 className="text-center text-4xl font-extrabold">
         What does{' '}
-        <strong className="bg-gradient-to-r from-emerald-200 to-emerald-400 bg-clip-text text-transparent">
+        <strong className="bg-gradient-to-r from-emerald-500 to-emerald-700 dark:from-emerald-200 dark:to-emerald-400 bg-clip-text text-transparent">
           Form Wizard
         </strong>{' '}
         has to offer?

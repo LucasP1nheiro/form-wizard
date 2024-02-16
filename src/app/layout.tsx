@@ -33,7 +33,7 @@ export default async function RootLayout({
       <link rel="icon" href={icon.src} />
       <body className={inter.className}>
         <ReactQueryClienProvider>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
             <Header user={user} />
             {children}
             <Toaster />
