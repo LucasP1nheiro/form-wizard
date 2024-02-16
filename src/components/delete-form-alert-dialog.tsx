@@ -19,10 +19,13 @@ import { Form } from 'react-hook-form'
 import { toast } from 'sonner'
 import { ClipLoader } from 'react-spinners'
 import { Database } from '@/db/schema'
+import { useRouter } from 'next/navigation'
 
 type Form = Database['public']['Tables']['forms']['Row']
 
 const DeleteFormAlertDialog = ({ formId }: { formId: number }) => {
+  const { push } = useRouter()
+
   const queryClient = useQueryClient()
 
   const { mutateAsync: deleteFormFn, isPending } = useMutation({
@@ -34,8 +37,10 @@ const DeleteFormAlertDialog = ({ formId }: { formId: number }) => {
         return filtedForms
       })
 
+      push('/')
+
       toast.success('Form deleted', {
-        description: `The form  was created successfully.`,
+        description: `The form was deleted successfully.`,
       })
     },
     onError: () => {
