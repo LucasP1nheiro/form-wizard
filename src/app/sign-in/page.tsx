@@ -4,8 +4,20 @@ import logo from '@/assets/logo.svg'
 import Link from 'next/link'
 import { Boxes } from '@/components/ui/background-boxes'
 import { SignInForm } from './sign-in-form'
+import createClient from '@/lib/supabase-server'
+import { redirect } from 'next/navigation'
 
-export default function Page() {
+export default async function Page() {
+  const supabase = createClient()
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  if (user) {
+    redirect('/')
+  }
+
   return (
     <main className="w-screen h-screen max-h-screen overflow-hidden flex items-center justify-center relative">
       <div className="absolute inset-0 w-full h-full bg-background/90 z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />

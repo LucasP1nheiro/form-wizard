@@ -8,7 +8,6 @@ import { z } from 'zod'
 import { Label } from '../../components/ui/label'
 import { Button } from '../../components/ui/button'
 import supabase from '@/lib/supabase-browser'
-import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { AuthError } from '@supabase/supabase-js'
 
@@ -23,7 +22,6 @@ type EmailSchema = z.infer<typeof emailSchema>
 
 export function SignInForm() {
   const [loginError, setLoginError] = useState<AuthError | null>(null)
-  const router = useRouter()
 
   const {
     register,
@@ -42,7 +40,6 @@ export function SignInForm() {
 
       if (data && !error) {
         location.reload()
-        router.push('/')
       }
 
       setLoginError(error)
