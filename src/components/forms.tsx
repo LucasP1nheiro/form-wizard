@@ -16,14 +16,15 @@ import { Button } from './ui/button'
 import Link from 'next/link'
 import { Library, Plus } from 'lucide-react'
 import { getReplysByFormId } from '@/data/replys'
+import { User } from '@supabase/supabase-js'
 
-const Forms = () => {
+const Forms = ({ user }: { user: User }) => {
   const { data: forms, isLoading } = useQuery({
     queryKey: ['forms'],
-    queryFn: getForms,
+    queryFn: () => getForms({ userId: user.id }),
   })
 
-  const lastFormCreatedId = forms ? forms[0].id : null
+  const lastFormCreatedId = forms && forms?.length > 0 ? forms[0].id : null
 
   const { data: replies } = useQuery({
     queryKey: ['replies', lastFormCreatedId],

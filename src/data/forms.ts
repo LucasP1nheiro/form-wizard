@@ -1,6 +1,10 @@
 import { Json } from '@/db/schema'
 import supabase from '@/lib/supabase-browser'
 
+interface GetFormsRequest {
+  userId: string
+}
+
 interface CreateFormRequest {
   name: string
   description: string
@@ -15,11 +19,12 @@ interface getFormByIdRequest {
   formId: number
 }
 
-export async function getForms() {
+export async function getForms({ userId }: GetFormsRequest) {
   const { data: forms } = await supabase
     .from('forms')
     .select()
     .order('created_at', { ascending: false })
+    .match({ user_id: userId })
 
   return forms
 }

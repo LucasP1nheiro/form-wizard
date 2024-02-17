@@ -1,9 +1,21 @@
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
+import createClient from '@/lib/supabase-server'
 
 import Forms from '@/components/forms'
+import { redirect } from 'next/navigation'
 
-export default function Page() {
+export default async function Page() {
+  const supabase = createClient()
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  if (!user) {
+    redirect('/sign-in')
+  }
+
   return (
     <main className="bg-background w-screen min-h-screen flex flex-col p-4 gap-12 py-32">
       <div className="lg:w-4/5 mx-auto flex items-center gap-2 justify-end w-full">
@@ -16,7 +28,7 @@ export default function Page() {
           </Link>
         </Button>
       </div>
-      <Forms />
+      <Forms user={user} />
     </main>
   )
 }
