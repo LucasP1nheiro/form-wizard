@@ -15,8 +15,9 @@ interface DeleteFormRequest {
   formId: number
 }
 
-interface getFormByIdRequest {
+interface GetFormByIdRequest {
   formId: number
+  userId: string
 }
 
 export async function getForms({ userId }: GetFormsRequest) {
@@ -41,11 +42,11 @@ export async function deleteForm({ formId }: DeleteFormRequest) {
   await supabase.from('forms').delete().eq('id', formId)
 }
 
-export async function getFormByIdRequest({ formId }: getFormByIdRequest) {
+export async function getFormById({ formId, userId }: GetFormByIdRequest) {
   const { data: forms } = await supabase
     .from('forms')
     .select()
-    .match({ id: formId })
+    .match({ id: formId, user_id: userId })
     .limit(1)
     .single()
 
