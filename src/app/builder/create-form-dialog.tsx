@@ -31,7 +31,7 @@ const formSchema = z.object({
   description: z
     .string()
     .min(10, 'The description has to be at least 10 characters')
-    .max(100, 'The description has to be 100 characters maximum.'),
+    .max(500, 'The description has to be 500 characters maximum.'),
 })
 
 type FormSchema = z.infer<typeof formSchema>
