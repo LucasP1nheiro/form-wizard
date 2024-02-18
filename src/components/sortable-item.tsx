@@ -92,9 +92,9 @@ export function SortableItem({ deleteItem, id, type }: SortableItemsProps) {
             setShouldOpenSheet={setShouldOpenSheet}
           >
             <SheetHeader>
-              <SheetTitle>Edit Subtitle field</SheetTitle>
+              <SheetTitle>Edit {type} field</SheetTitle>
               <SheetDescription>
-                Make changes to your subtitle here. Click save when you done.
+                Make changes to your {type} here. Click save when you done.
               </SheetDescription>
             </SheetHeader>
             {component?.sheetContent(id)}
