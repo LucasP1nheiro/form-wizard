@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query'
 import React from 'react'
 import { BookText, Clock, Mails, UserRound } from 'lucide-react'
 import { formatDate } from 'date-fns'
+import ReplyLoading from '@/components/loading/reply-loading'
 
 interface PageProps {
   params: {
@@ -14,10 +15,14 @@ interface PageProps {
 }
 
 const Page = ({ params: { slug } }: PageProps) => {
-  const { data: replies } = useQuery({
+  const { data: replies, isLoading } = useQuery({
     queryKey: ['reply', slug],
     queryFn: () => getReplyByShareUrl({ shareUrl: slug }),
   })
+
+  if (isLoading) {
+    return <ReplyLoading />
+  }
 
   if (!replies || replies.length === 0 || replies === undefined) {
     return null
@@ -53,7 +58,7 @@ const Page = ({ params: { slug } }: PageProps) => {
           <div className="p-4 rounded-md border border-border w-full xl:w-[300px] flex items-center gap-4 truncate">
             <Clock className="text-primary" />
             <p className="dark:text-muted-foreground">
-              {formatDate(reply.created_at, 'PPP')}
+              {formatDate(reply.created_at, 'PPP p')}
             </p>
           </div>
         </section>

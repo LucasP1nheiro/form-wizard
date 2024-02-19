@@ -34,7 +34,7 @@ const Forms = ({ user }: { user: User }) => {
 
   if (isLoading) {
     return (
-      <div className="lg:w-4/5 mx-auto space-y-8 w-full">
+      <div className="lg:w-4/5 mx-auto space-y-16 w-full">
         <h1 className="text-2xl font-extrabold text-center lg:text-start">
           Your Form Vault
         </h1>

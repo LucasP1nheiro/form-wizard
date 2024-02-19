@@ -1,6 +1,7 @@
 'use client'
 
 import DeleteFormAlertDialog from '@/components/delete-form-alert-dialog'
+import FormLoading from '@/components/loading/form-loading'
 import RepliesFromForm from '@/components/reply/replies-from-form'
 import { ShareForm } from '@/components/share-form'
 import { getFormById } from '@/data/forms'
@@ -21,7 +22,7 @@ const Form = ({ formId, userId }: FormProps) => {
   })
 
   if (isLoading) {
-    return <p>Loading...</p>
+    return <FormLoading />
   }
 
   if (form === undefined || !form) {

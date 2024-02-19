@@ -8,6 +8,7 @@ import { ReplyFields } from '@/types/reply'
 import CustomBarChart from '../charts/custom-bar-chart'
 import SubmissionsLineChart from '../charts/submissions-line-chart'
 import ReplyTable from '../tables/reply-table'
+import RepliesFromFormLoading from '../loading/replies-from-form-loading'
 
 type Form = Database['public']['Tables']['forms']['Row']
 
@@ -16,10 +17,14 @@ interface RepliesFromFormProps {
 }
 
 const RepliesFromForm: React.FC<RepliesFromFormProps> = ({ form }) => {
-  const { data: replies } = useQuery({
+  const { data: replies, isLoading } = useQuery({
     queryKey: ['replies', form.id],
     queryFn: () => getReplysByFormId({ formId: form.id }),
   })
+
+  if (isLoading) {
+    return <RepliesFromFormLoading />
+  }
 
   if (!replies || replies.length === 0 || replies === undefined) {
     return (
