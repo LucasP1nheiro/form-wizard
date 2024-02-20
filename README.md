@@ -1,11 +1,11 @@
 <h3 align="center">
-  <a href="https://github.com/LucasP1nheiro/form-wizard">Form Wizard</a>
+  <a href="https://form-wizard-nine.vercel.app/">Form Wizard</a>
 </h3>
 
 <br />
 
 
-<a href="https://github.com/LucasP1nheiro/form-wizard">
+<a href="https://form-wizard-nine.vercel.app/">
   <div align="center">
     <img src="public/thumbnail.svg" />
   </div>
