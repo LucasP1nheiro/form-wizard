@@ -1,8 +1,6 @@
 'use client'
 
 import { Input } from '../ui/input'
-import { Label } from '../ui/label'
-import { Switch } from '../ui/switch'
 import { Button } from '../ui/button'
 import { Badge } from '../ui/badge'
 import { Plus, X } from 'lucide-react'
@@ -41,14 +39,6 @@ const RadioGroupFields = ({ id }: { id: string }) => {
     setComponents(
       components.map((item) =>
         item.id === id ? { ...item, props: { ...props, label: text } } : item,
-      ),
-    )
-  }
-
-  const handleRequiredChange = (required: boolean) => {
-    setComponents(
-      components.map((item) =>
-        item.id === id ? { ...item, props: { ...props, required } } : item,
       ),
     )
   }
@@ -95,13 +85,6 @@ const RadioGroupFields = ({ id }: { id: string }) => {
         onChange={(e) => handleLabelChange(e.target.value)}
         value={props.label}
       />
-      <div className="flex items-center justify-between">
-        <Label>Is this radio group field required?</Label>
-        <Switch
-          onCheckedChange={() => handleRequiredChange(!props.required)}
-          checked={props.required}
-        />
-      </div>
       <form
         onSubmit={handleSubmit(handleAddOption)}
         className="flex items-start gap-2"

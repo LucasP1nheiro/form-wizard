@@ -42,7 +42,11 @@ const ReplyRadioGroup = ({
         <Label htmlFor={id}>{label}</Label>
         {required && <span className="text-primary">*</span>}
       </div>
-      <RadioGroup onValueChange={handleChange} required={required}>
+      <RadioGroup
+        onValueChange={handleChange}
+        required={required}
+        defaultValue={options[0]}
+      >
         {options.map((option) => (
           <div className="flex items-center space-x-2" key={option}>
             <RadioGroupItem value={option} id={option} />

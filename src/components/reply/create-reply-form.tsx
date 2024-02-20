@@ -8,14 +8,24 @@ import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { ClipLoader } from 'react-spinners'
 import { toast } from 'sonner'
-import { ComponentPropsMap, ComponentProps } from '@/types/components'
+import {
+  ComponentPropsMap,
+  ComponentProps,
+  InputProps,
+  CheckboxProps,
+  DatePickerProps,
+  RadioGroupProps,
+  TextareaProps,
+  SelectProps,
+} from '@/types/components'
 import { Input } from '../ui/input'
 import { Label } from '../ui/label'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Span } from 'next/dist/trace'
 import { cn } from '@/lib/utils'
+import { ReplyFields } from '@/types/reply'
+import { useEffect, useState } from 'react'
 
 interface CreateReplyFormProps {
   fields: ComponentProps<keyof ComponentPropsMap>[]
@@ -30,6 +40,8 @@ const replyFormSchema = z.object({
 type ReplyFormSchema = z.infer<typeof replyFormSchema>
 
 const CreateReplyForm = ({ formId, fields }: CreateReplyFormProps) => {
+  const [initialState, setInitialState] = useState<ReplyFields[]>([])
+
   const {
     register,
     handleSubmit,
@@ -69,6 +81,81 @@ const CreateReplyForm = ({ formId, fields }: CreateReplyFormProps) => {
       })
     }
   }
+
+  // setting up reply fields state management here to preserve the same order and prevent empty answers
+  fields.forEach((field) => {
+    const newItem: ReplyFields = {
+      id: field.id,
+      label: '',
+      value: '',
+      type: undefined,
+    }
+
+    switch (field.type) {
+      case 'input': {
+        const props = field.props as InputProps
+
+        newItem.label = props.label
+        newItem.type = 'input'
+        break
+      }
+
+      case 'check box': {
+        const props = field.props as CheckboxProps
+
+        newItem.label = props.label
+        newItem.value = 'no'
+        newItem.type = 'check-box'
+        break
+      }
+
+      case 'date picker': {
+        const props = field.props as DatePickerProps
+
+        newItem.label = props.label
+        newItem.value = new Date().toISOString()
+        newItem.type = 'date-picker'
+        break
+      }
+
+      case 'radio group': {
+        const props = field.props as RadioGroupProps
+
+        newItem.label = props.label
+        newItem.value = props.options[0]
+        newItem.type = 'radio-group'
+        break
+      }
+
+      case 'text area': {
+        const props = field.props as TextareaProps
+
+        newItem.label = props.label
+        newItem.type = 'text-area'
+
+        break
+      }
+
+      case 'select': {
+        const props = field.props as SelectProps
+
+        newItem.label = props.label
+        newItem.type = 'select'
+      }
+    }
+
+    if (newItem.type !== undefined) {
+      // Check if the item with the same ID already exists in the state
+      if (!initialState.some((item) => item.id === newItem.id)) {
+        setInitialState((prev) => [...prev, newItem])
+      }
+    }
+  })
+
+  useEffect(() => {
+    setReplyFields(initialState)
+    // eslint-disable-next-line
+  }, [])
 
   return (
     <form

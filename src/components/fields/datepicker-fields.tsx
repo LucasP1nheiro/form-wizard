@@ -1,7 +1,5 @@
 import React from 'react'
 import { Input } from '../ui/input'
-import { Label } from '../ui/label'
-import { Switch } from '../ui/switch'
 import { useComponentStore } from '@/store/components'
 import { DatePickerProps } from '@/types/components'
 
@@ -20,13 +18,6 @@ const DatePickerFields = ({ id }: { id: string }) => {
     )
   }
 
-  const handleRequiredChange = (required: boolean) => {
-    setComponents(
-      components.map((item) =>
-        item.id === id ? { ...item, props: { ...props, required } } : item,
-      ),
-    )
-  }
   const handlePlaceholderChange = (text: string) => {
     setComponents(
       components.map((item) =>
@@ -49,13 +40,6 @@ const DatePickerFields = ({ id }: { id: string }) => {
         onChange={(e) => handleLabelChange(e.target.value)}
         value={props.label}
       />
-      <div className="flex items-center justify-between">
-        <Label>Is this date picker field required?</Label>
-        <Switch
-          onCheckedChange={() => handleRequiredChange(!props.required)}
-          checked={props.required}
-        />
-      </div>
     </div>
   )
 }
