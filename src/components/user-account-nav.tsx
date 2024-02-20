@@ -11,7 +11,6 @@ import {
   DropdownMenuItem,
 } from '@/components/ui/dropdown-menu'
 import { LogOut, UserRound } from 'lucide-react'
-import { Profiler } from 'react'
 
 export function UserAccountNav({
   userEmail,
@@ -33,10 +32,7 @@ export function UserAccountNav({
       >
         <DropdownMenuLabel>{userEmail}</DropdownMenuLabel>
         <DropdownMenuSeparator className="bg-muted-forefround" />
-        <DropdownMenuItem className="flex items-center gap-2 cursor-pointer">
-          <UserRound />
-          <p>Profile</p>
-        </DropdownMenuItem>
+
         <DropdownMenuSeparator className="bg-muted-forefround" />
         <DropdownMenuItem
           onSelect={async () => {
