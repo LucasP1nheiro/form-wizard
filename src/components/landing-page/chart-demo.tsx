@@ -1,24 +1,20 @@
 import {
   ResponsiveContainer,
   XAxis,
-  YAxis,
   Tooltip,
-  Bar,
-  Cell,
-  BarChart,
+  Legend,
+  Line,
+  LineChart,
 } from 'recharts'
 import CustomTooltip from '../charts/custom-tooltip'
 
 export function ChartDemo() {
   const data = [
-    { option: 'Option A', count: 25 },
-    { option: 'Option B', count: 40 },
-    { option: 'Option C', count: 30 },
-    { option: 'Option D', count: 20 },
-    { option: 'Option E', count: 10 },
+    { day: '2024-02-01', submissions: 10 },
+    { day: '2024-02-03', submissions: 20 },
+    { day: '2024-02-05', submissions: 8 },
+    { day: '2024-02-05', submissions: 23 },
   ]
-
-  const colors = ['#a7f3d0', '#6ee7b7', '#34d399', '#10b981', '#059669']
 
   return (
     <div className="w-full h-full">
@@ -29,28 +25,22 @@ export function ChartDemo() {
           <div className="w-4 h-4 rounded-full bg-emerald-300" />
         </div>
         <ResponsiveContainer width="100%" height={300}>
-          <BarChart
-            width={600}
-            height={300}
+          <LineChart
             data={data}
-            margin={{ top: 5, right: 10, left: 5, bottom: 5 }}
+            margin={{ top: 70, right: 10, left: 5, bottom: 5 }}
           >
-            <XAxis dataKey="option" />
-            <YAxis />
-            <Tooltip
-              cursor={{ fill: 'transparent' }}
-              content={<CustomTooltip />}
+            <XAxis dataKey="day" opacity={0} />
+            <Legend />
+            <Tooltip content={<CustomTooltip />} />
+            <Line
+              type="monotone"
+              dataKey="submissions"
+              stroke="#34d399"
+              activeDot={{ r: 8 }}
             />
-            <Bar dataKey="count" fill="#8884d8" barSize={40}>
-              {data.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={colors[index % 5]} />
-              ))}
-            </Bar>
-          </BarChart>
+          </LineChart>
         </ResponsiveContainer>
       </div>
-      <div className="h-32 w-32 bg-emerald-300 rounded-full relative bottom-56 md:left-[310px] left-36 -z-10 opacity-60" />
-      <div className="h-32 w-32 bg-emerald-400 rounded-full relative bottom-96 md:left-[410px] left-36 -z-10 opacity-60" />
     </div>
   )
 }

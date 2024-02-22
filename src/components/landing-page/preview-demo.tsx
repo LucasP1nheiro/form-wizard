@@ -27,7 +27,7 @@ const PreviewDemo = () => {
           </div>
         </div>
       </div>
-      <div className="h-full w-full lg:w-4/5 rounded-lg bg-black/5 dark:bg-white/5 duration-300 transition-all z-50 border border-border relative left-8 md:left-56 bottom-32 backdrop-blur-xl pb-8 group-hover:scale-110">
+      <div className="h-full w-full lg:w-4/5 rounded-lg bg-black/5 dark:bg-white/5 duration-300 transition-all z-50 border border-border relative left-8 md:left-56 xl:left-32 2xl:left-56 bottom-32 backdrop-blur-xl pb-8 group-hover:scale-110">
         <div className="h-8 border-b border-border w-full px-2 flex items-center gap-3 mb-5">
           <div className="w-4 h-4 rounded-full bg-emerald-500" />
           <div className="w-4 h-4 rounded-full bg-emerald-400" />
