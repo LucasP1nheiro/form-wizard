@@ -72,7 +72,7 @@ export function PreviewComponents({
       return (
         <div className="space-y-2">
           <Label>{props.label}</Label>
-          <Input placeholder={props.placeholder} />
+          <Input placeholder={props.placeholder} className="max-w-[420px]" />
         </div>
       )
     }
@@ -83,7 +83,7 @@ export function PreviewComponents({
       return (
         <div className="space-y-2">
           <Label>{props.label}</Label>
-          <Textarea placeholder={props.placeholder} />
+          <Textarea placeholder={props.placeholder} className="max-w-[420px]" />
         </div>
       )
     }

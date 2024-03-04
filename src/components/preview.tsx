@@ -28,7 +28,7 @@ export function Preview() {
           Preview
         </Button>
       </DialogTrigger>
-      <DialogContent className="min-w-96 border border-border">
+      <DialogContent className="xl:min-w-[1000px] border border-border">
         <DialogHeader>
           <DialogTitle>Preview</DialogTitle>
           <DialogDescription>
@@ -37,9 +37,9 @@ export function Preview() {
         </DialogHeader>
         {components.length > 0 && (
           <div className="space-y-4">
-            <ScrollArea className="w-full h-full max-h-[600px] rounded-md border border-border p-4 flex flex-col">
+            <ScrollArea className="w-full h-full max-h-[600px] rounded-md py-4 flex flex-col">
               {components.map((component) => (
-                <div className="px-4 py-2" key={component.id}>
+                <div className="px-1 py-2" key={component.id}>
                   <PreviewComponents component={component} />
                 </div>
               ))}
