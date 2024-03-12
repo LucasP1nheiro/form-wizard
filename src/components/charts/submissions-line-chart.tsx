@@ -1,6 +1,4 @@
-import { getReplysByFormId } from '@/data/replys'
 import { Database } from '@/db/schema'
-import { useQuery } from '@tanstack/react-query'
 import { formatDate } from 'date-fns'
 import React from 'react'
 import {
@@ -29,7 +27,19 @@ const SubmissionsLineChart = ({
     return null
   }
 
-  const groupedReplies: { [key: string]: Reply[] } = replies.reduce(
+  const sortedReplies = replies.slice().sort((a, b) => {
+    const dateA = new Date(a.created_at)
+    const dateB = new Date(b.created_at)
+
+    if (dateA.getTime() === dateB.getTime()) {
+      return 0
+    } else if (dateA.getTime() > dateB.getTime()) {
+      return 1
+    }
+    return -1
+  })
+
+  const groupedReplies: { [key: string]: Reply[] } = sortedReplies.reduce(
     (acc: { [key: string]: Reply[] }, reply) => {
       const date = formatDate(new Date(reply.created_at), 'PPP')
       if (!acc[date]) {
