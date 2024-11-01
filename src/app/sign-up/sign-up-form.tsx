@@ -122,7 +122,7 @@ export function SignUpForm() {
         type="submit"
         className="bg-emerald-600 border border-emerald-200 w-full"
       >
-        Sing Up
+        Sign Up
       </Button>
     </form>
   )

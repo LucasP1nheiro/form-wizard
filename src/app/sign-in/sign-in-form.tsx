@@ -88,7 +88,7 @@ export function SignInForm() {
         type="submit"
         className="bg-emerald-600 border border-emerald-200 w-full"
       >
-        Sing In
+        Sign In
       </Button>
       {loginError && (
         <p className="text-md text-red-500">{loginError.message}</p>
